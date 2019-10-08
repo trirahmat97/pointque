@@ -1,0 +1,25 @@
+.container {
+  margin: 10px;
+}
+
+.content-pointq {
+  margin-top: 20px;
+}
+
+
+.container-user {
+  margin: 10px;
+}
+
+.example-card {
+  max-width: 300px;
+}
+
+.example-header-image {
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLMXEtafCkq2nYjPZIUEslsXoVXNBzURoDLeblurcyeQWK0_ly8g');
+  background-size: cover;
+}
+
+mat-chip {
+  max-width: 98%;
+}

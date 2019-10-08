@@ -1,0 +1,21 @@
+daftar service change pointing :
+
+host-1 : https://appraddev01.dev.corp.btpn.co.id
+host-2 : https://appradpts03.dev.corp.btpn.co.id
+
+https://appraddev01.dev.corp.btpn.co.id
+
+appradpts03.dev.corp.btpn.co.id
+
+service name 
+1. PURELOAN Main Image Status mobilesaving
+2. PURELOAN Deviation mobilesaving
+3. Main Lorina Notify BI mobilesaving
+4. PURELOAN Main Loan Mobilesaving
+5. UWMP mobilesaving
+6. PURELOAN Potensi Tele mobilesaving
+7. PURELOAN Main Saving mobilesaving
+8. PURELOAN Pelunasan Main Loan mobilesaving
+9. PURELOAN Sync Data mobilesaving
+
+appraddev03.dev.corp.btpn.co.id

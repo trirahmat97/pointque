@@ -1,0 +1,32 @@
+<div class="container" fxLayout="row">
+  <div class="column-left" fxFlex="1 1 calc(20em + 20px)" fxHide.xs fxHide.sm>
+
+  </div>
+  <div class="column-right" fxFlex>
+    <!-- <app-login></app-login> -->
+    <mat-card>
+      <mat-spinner *ngIf="isLoading"></mat-spinner>
+      <form [formGroup]="formLogin" (submit)="onLogin()" fxLayout="column" fxLayoutAlign="center center"
+        fxLayoutGap="10px" *ngIf="!isLoading">
+        <mat-form-field hintLabel="Email">
+          <input type="text" matInput placeholder="E-mail" formControlName="email">
+          <mat-error *ngIf="formLogin.get('email').invalid">Field enter Email!</mat-error>
+        </mat-form-field>
+        <mat-form-field hintLabel="Please Enter Password.">
+          <input type="password" matInput placeholder="Password" formControlName="password"
+            [type]="hide ? 'password' : 'text'">
+          <span mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </span>
+          <mat-error *ngIf="formLogin.get('password').invalid">Missing Password!</mat-error>
+        </mat-form-field>
+
+        <button type="submit" mat-flat-button color="primary" [disabled]="formLogin.invalid"
+          *ngIf="!isLoading">Login</button>
+      </form>
+
+    </mat-card>
+
+  </div>
+</div>

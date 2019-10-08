@@ -1,0 +1,53 @@
+<mat-toolbar color="primary">
+  <div fxHide.gt-sm>
+    <button mat-icon-button (click)="onToggleSidenav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+  <div class="item-left">
+    <button mat-button>
+      <mat-icon>card_membership</mat-icon>
+      <span class="icon-caption">PoinQue</span>
+    </button>
+  </div>
+  <div fxFlex fxLayout fxLayoutAlign="flex-end">
+    <div class="card-notify">
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon matBadge="2" matBadgeColor="warn" matBadgeSize="small">notifications</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>dialpad</mat-icon>
+          <span>Redial</span>
+        </button>
+        <button mat-menu-item disabled>
+          <mat-icon>voicemail</mat-icon>
+          <span>Check voice mail</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>notifications_off</mat-icon>
+          <span>Disable alerts</span>
+        </button>
+      </mat-menu>
+    </div>
+
+    <div class="card-icon">
+      <button mat-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <span class="icon-caption2">Tra</span>
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>assignment_ind</mat-icon>
+          <span>Profile</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>notifications_off</mat-icon>
+          <span>Disable alerts</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+  <div>
+  </div>
+</mat-toolbar>

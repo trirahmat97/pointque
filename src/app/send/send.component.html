@@ -1,0 +1,57 @@
+<div class="conatiner">
+  <mat-card>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+
+    <form [formGroup]="formSend" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" *ngIf="!isLoading">
+      <mat-form-field hintLabel="Pilih Bank">
+        <mat-select formControlName="bank">
+          <mat-option value="pointque">PointQue</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field hintLabel="Rekening Tujuan">
+        <input type="text" matInput placeholder="Norek" formControlName="norek">
+        <mat-error *ngIf="formSend.get('norek').invalid">Field enter Norek!</mat-error>
+      </mat-form-field>
+
+      <div class="find">
+        <button mat-flat-button color="primary" [disabled]="formSend.get('norek').invalid" (click)="onFind()"
+          *ngIf="!isLoading">
+          <mat-icon>search</mat-icon>Find
+        </button>
+      </div>
+
+      <!-- <mat-divider></mat-divider> -->
+
+      <mat-form-field hintLabel="" *ngIf="formSend.get('receiver').valid">
+        <input type="text" matInput placeholder="Receiver" formControlName="receiver">
+        <mat-error *ngIf="formSend.get('receiver').invalid">Receiver not Found!
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field hintLabel="Amount" *ngIf="formSend.get('receiver').valid">
+        <!-- <mat-slider thumbLabel [(displayWith)]="formatLabel" tickInterval="1" min="1" max="100000" color="primary">
+        </mat-slider> -->
+        <input type="number" matInput placeholder="" formControlName="amount">
+        <!-- <mat-error *ngIf="formSend.get('amount').invalid">Failed Amount!</mat-error> -->
+      </mat-form-field>
+
+      <mat-form-field hintLabel="PIN" *ngIf="formSend.get('amount').valid">
+        <input type="password" matInput placeholder="" formControlName="pin" [type]="hide ? 'password' : 'text'">
+        <span mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </span>
+      </mat-form-field>
+
+
+      <mat-form-field *ngIf="formSend.get('amount').valid" hintLabel="Amount">
+        <input matInput #message maxlength="100" placeholder="Message" formControlName="description">
+        <mat-hint align="start"><strong>Caracter</strong> </mat-hint>
+        <mat-hint align="end">{{message.value.length}} / 100</mat-hint>
+      </mat-form-field>
+
+      <button class="hu" mat-flat-button color="primary" [disabled]="formSend.invalid" *ngIf="!isLoading"
+        (click)="onSend()">Send</button>
+    </form>
+  </mat-card>
+</div>

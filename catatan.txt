@@ -1,0 +1,17 @@
+$lte : kurang dari <
+$eq : sama ==
+$gt : lebih besar >=
+$gte : lebih besar >=
+$in :
+$lt : < 
+$ne : != 
+
+
+$gte    : >=
+$gt     : >
+$lte    : <
+$lt     : < 
+
+gte = lt
+db.getCollection('nasabahs').find({createdAt: {"$lt": new Date("2019-10"), "$gte": new Date("2019-09"), }}).count()
+https://stackoverflow.com/questions/2943222/find-objects-between-two-dates-mongodb

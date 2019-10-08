@@ -1,0 +1,29 @@
+.container {
+  /* margin: 100px; */
+  height: 655px;
+  /* height: 100%; */
+  /* width: 100%; */
+
+}
+
+mat-form-field {
+  width: 300px;
+}
+
+button {
+  width: 300px;
+}
+
+mat-spinner {
+  margin: auto;
+}
+
+
+.column-left {
+  background-color: #3F51B5;
+}
+
+.column-right {
+  background-color: #FAFAFA;
+  box-shadow: -7px 5px 11px -3px rgba(0, 0, 0, 0.49);
+}

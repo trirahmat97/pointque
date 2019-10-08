@@ -1,0 +1,20 @@
+.conatiner {
+  margin: 10px;
+}
+
+mat-form-field,
+mat-slider {
+  width: 400px;
+}
+
+.hu {
+  width: 400px;
+}
+
+.find {
+  position: right;
+}
+
+mat-spinner {
+  margin: auto;
+}

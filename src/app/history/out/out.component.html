@@ -1,0 +1,45 @@
+<div class="container">
+  <div fxLayoutAlign="center center" class="filter">
+    <mat-form-field fxFlex="40%">
+      <input type="input" matInput (keyup)="doFilterOut($event.target.value)" placeholder="Search ..">
+    </mat-form-field>
+  </div>
+  <div class="example-container">
+    <mat-table [dataSource]="dataSourceOut" matSort>
+      <ng-container matColumnDef="receiver" sticky>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Receiver</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.receiver}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="rekeningout">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Rekening</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.receiverName}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="amountout">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Mount</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{element.amount | currency:"Rp "}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="point">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Point</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button mat-mini-fab color="accent">{{element.point}}</button>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="dateout">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Date</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.createdAt | date:'medium'}}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayColumnsOut; sticky: true"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayColumnsOut"></mat-row>
+    </mat-table>
+    <!-- <mat-spinner *ngIf="isLoading"></!-->
+  </div>
+  <mat-paginator [length]="totalPostOut" [pageSize]="postPerpageOut" [pageSizeOptions]="pageSizeOptionOut">
+  </mat-paginator>
+</div>

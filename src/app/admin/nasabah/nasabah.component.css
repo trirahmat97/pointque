@@ -1,0 +1,12 @@
+.conatiner {
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+mat-toolbar {
+  margin: 0px;
+}
+
+mat-spinner {
+  margin: auto;
+}

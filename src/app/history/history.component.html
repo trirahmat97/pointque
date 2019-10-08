@@ -1,0 +1,142 @@
+<div class="container">
+  <mat-grid-list cols="8" rowHeight="188px" gutterSize="10px">
+
+    <mat-grid-tile colspan="3" rowspan="3" style="background:white">
+      <mat-card style="height: 95%; width: 95%;">
+        <mat-tab-group>
+          <mat-tab label="Bulanan">
+            <div class="container-bulan">
+              <section class="point-bulan" fxLayout="column" fxLayoutAlign="center center">
+                <mat-progress-spinner mode="determinate" value="60"></mat-progress-spinner>
+                <h1>60%</h1>
+                <p>
+                  <span>100</span> / <span>300</span>
+                  <mat-progress-bar mode="buffer" value="60"></mat-progress-bar>
+                  <span>Total Your Point September!</span>
+                </p>
+              </section>
+              <div class="container-bulan-hadiah">
+                <mat-list>
+                  <h3 mat-subheader>Undian September!</h3>
+                  <mat-list-item>
+                    <mat-icon mat-list-icon>check_circle</mat-icon>
+                    <h4 mat-line>Pemenang 1</h4>
+                    <p mat-line> Rp. 500.000,00 </p>
+                    <button mat-fab color="primary">300</button>
+                  </mat-list-item>
+                  <mat-list-item>
+                    <mat-icon mat-list-icon>check_circle</mat-icon>
+                    <h4 mat-line>Pemenang 2</h4>
+                    <p mat-line> Rp. 1.000.000,00 </p>
+                    <button mat-fab color="accent">200</button>
+                  </mat-list-item>
+                  <mat-list-item>
+                    <mat-icon mat-list-icon>check_circle</mat-icon>
+                    <h4 mat-line>Pemenang 3</h4>
+                    <p mat-line> Rp. 1.500.000,00 </p>
+                    <button mat-fab color="warn">100</button>
+                  </mat-list-item>
+                </mat-list>
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab label="Tahunan">
+            <div class="container-tahun">
+              <section class="point-tahun" fxLayout="column" fxLayoutAlign="center center">
+                <mat-progress-spinner mode="determinate" value="95"></mat-progress-spinner>
+                <h1>95%</h1>
+                <p>
+                  <span>1000</span> / <span>3000</span>
+                  <mat-progress-bar mode="buffer" value="90"></mat-progress-bar>
+                  <span>Total Your Point 2019!</span>
+                </p>
+              </section>
+              <div class="container-tahun-hadiah">
+                <mat-list>
+                  <h3 mat-subheader>Undian Tahun 2019!</h3>
+                  <mat-list-item>
+                    <mat-icon mat-list-icon>check_circle</mat-icon>
+                    <h4 mat-line>Pemenang 1</h4>
+                    <p mat-line> Hoda Jezz </p>
+                    <button mat-fab color="primary">3000</button>
+                  </mat-list-item>
+                  <mat-list-item>
+                    <mat-icon mat-list-icon>check_circle</mat-icon>
+                    <h4 mat-line>Pemenang 2</h4>
+                    <p mat-line> Emas 25 Kg </p>
+                    <button mat-fab color="accent">2000</button>
+                  </mat-list-item>
+                  <mat-list-item>
+                    <mat-icon mat-list-icon>check_circle</mat-icon>
+                    <h4 mat-line>Pemenang 3</h4>
+                    <p mat-line> Honda Vario 125 </p>
+                    <button mat-fab color="warn">1000</button>
+                  </mat-list-item>
+                </mat-list>
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card>
+    </mat-grid-tile>
+
+    <!-- history -->
+    <mat-grid-tile colspan="5" rowspan="3" style="background:white">
+      <mat-card style="height: 95%; width: 95%;">
+        <mat-tab-group>
+          <!-- history in -->
+          <mat-tab label="History In">
+            <div fxLayoutAlign="center center" class="filter">
+              <mat-form-field fxFlex="40%">
+                <input type="input" matInput (keyup)="doFilterIn($event.target.value)" placeholder="Search Nasabah">
+              </mat-form-field>
+            </div>
+            <div class="example-container">
+              <mat-table [dataSource]="dataSourceIn" matSort>
+                <ng-container matColumnDef="sender" sticky>
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Sender</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{element.sender}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="rekeningin">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Rekening</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{element.senderName}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="amountin">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Mount</mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                    {{element.amount | currency:"Rp "}}
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="point">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Point</mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                    <button mat-mini-fab color="primary">+{{element.point}}</button>
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="datein">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Date</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{element.createdAt | date:'medium'}}</mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayColumnsIn; sticky: true"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayColumnsIn"></mat-row>
+              </mat-table>
+              <!-- <mat-spinner *ngIf="isLoading"></!-->
+            </div>
+            <mat-paginator [length]="totalPostIn" [pageSize]="postPerpageIn" [pageSizeOptions]="pageSizeOptionIn">
+            </mat-paginator>
+          </mat-tab>
+
+          <!-- history out -->
+          <mat-tab label="History Out">
+            <app-out></app-out>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

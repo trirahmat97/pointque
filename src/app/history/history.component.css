@@ -1,0 +1,29 @@
+.container {
+  margin-left: 10px;
+}
+
+.container-content {
+  /* height: 500px; */
+}
+
+mat-progress-spinner {
+  height: 200px;
+  width: 200px;
+}
+
+.filter {
+  margin-top: 20px;
+}
+
+mat-progress-spinner {
+  margin: auto;
+}
+
+.point-bulan,
+.point-tahun {
+  margin-top: 20px;
+}
+
+mat-progress-bar {
+  width: 300px;
+}

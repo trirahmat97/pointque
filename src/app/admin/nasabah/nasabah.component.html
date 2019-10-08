@@ -1,0 +1,58 @@
+<section class="conatiner">
+  <mat-card>
+    <mat-grid-list cols="4" rowHeight="550px">
+      <mat-grid-tile-header>
+        Data Nasabah PointQ!!
+      </mat-grid-tile-header>
+      <mat-grid-tile colspan="2">
+        <mat-card style="width: 90%; width: 90%">
+          <div fxLayoutAlign="center center">
+            <mat-form-field fxFlex="40%">
+              <input type="input" matInput (keyup)="doFilter($event.target.value)" placeholder="Search Nasabah">
+            </mat-form-field>
+          </div>
+          <div class="example-container">
+            <mat-table [dataSource]="dataSource" matSort>
+
+              <ng-container matColumnDef="name" sticky>
+                <mat-header-cell *matHeaderCellDef mat-sort-header>name</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="norek">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>norek</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.norek}}</mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="status">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>status</mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                  <button mat-mini-fab color="primary" aria-label="active"
+                    (click)="onChangeStatus(element.status, element.norek)" *ngIf="element.status == 1">
+                    <mat-icon>lock_open</mat-icon>
+                  </button>
+                  <button mat-mini-fab color="warn" aria-label="non-active"
+                    (click)="onChangeStatus(element.status, element.norek)" *ngIf="element.status == 2">
+                    <mat-icon>lock</mat-icon>
+                  </button>
+                </mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayColumns; sticky: true"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayColumns"></mat-row>
+            </mat-table>
+            <!-- <mat-spinner *ngIf="isLoading"></!-->
+          </div>
+          <mat-paginator [length]="totalPost" [pageSize]="postPerpage" [pageSizeOptions]="pageSizeOption">
+          </mat-paginator>
+        </mat-card>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="2">
+        <mat-card style="width: 90%; width: 90%">
+          <app-grafik></app-grafik>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card>
+</section>
