@@ -1,3 +1,39 @@
+MSL PROD : 
+
+1. PURELOAN Main Loan mobilesaving : sudah : aman
+2. PURELOAN Sync Data mobilesaving : sudah
+
+
+- Eform Loan Simulation mobilesaving : Internal : sudah : aman
+
+- Eform Loan Simulation mobilesaving EXT : sudah  : aman
+ 
+
+- FES Customer 360 mobilesaving
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 daftar service change pointing :
 
 host-1 : https://appraddev01.dev.corp.btpn.co.id

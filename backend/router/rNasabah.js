@@ -4,6 +4,7 @@ const router = express.Router();
 const controllerNasabah = require('../controller/cNasabah');
 
 router.post('', controllerNasabah.createNasabah);
+router.post('/check', controllerNasabah.getNasabahNorekPin);
 router.get('/getNasabah/:norek', controllerNasabah.getNasabah);
 router.get('/user/:id', controllerNasabah.getNasabahUserId);
 router.get('', controllerNasabah.listNasabah);

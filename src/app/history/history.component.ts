@@ -5,6 +5,7 @@ import { TransferData } from '../admin/model/transfer-data.model';
 import { TransferService } from '../admin/service/transfer.service';
 import { NasabahService } from '../admin/service/nasabah.service';
 import { Subscription } from 'rxjs';
+import { PoitnData } from '../admin/model/point-model';
 
 @Component({
   selector: 'app-history',
@@ -18,9 +19,18 @@ export class HistoryComponent implements OnInit, AfterViewInit, OnDestroy {
     private transferService: TransferService
   ) { }
 
+
+
   //poitn
   progress = 0;
   timer: number;
+
+  //point
+  dataPointTotal = 0;
+  dataPointInSub: Subscription;
+  dataPointOutSub: Subscription;
+  totalPointByMount = 0;
+  totalPointByYear = 0;
 
   //history in
   dataHistoryIn: TransferData[] = [];
@@ -39,18 +49,38 @@ export class HistoryComponent implements OnInit, AfterViewInit, OnDestroy {
 
   isLoading = false;
 
-  private userId2 = localStorage.getItem("userId");
+  userId2 = localStorage.getItem("userId");
   norek = '';
+  name = '';
 
   ngOnInit() {
     this.serviceNasabah.getNasabahByUserId(this.userId2).subscribe(resData => {
       this.norek = resData.message.norek;
+      this.name = resData.message.name;
+      console.log(this.name);
+
       this.transferService.historyTransferInListByNorek(this.norek, this.postPerPageIn, this.currentPageIn);
       this.dataHistoryInSub = this.transferService.getTransferInListener()
         .subscribe((resDataHistoryIn: { message: TransferData[], maxInHistory: number }) => {
           this.dataHistoryIn = resDataHistoryIn.message;
           this.dataSourceIn.data = this.dataHistoryIn.slice();
         });
+      //pointIn
+      this.dataHistoryInSub = this.transferService.getInSumPointMountByNorek(this.norek);
+      this.dataHistoryInSub = this.transferService.getOutSumPointMountByNorek(this.norek);
+      this.dataPointInSub = this.transferService.getInSumPointMountByNorekListener()
+        .subscribe((resPointIn: { message: number }) => {
+          this.dataPointOutSub = this.transferService.getOutSumPointMountByNorekListener()
+            .subscribe((resPointOut: { message: number }) => {
+              const dataPoint = resPointIn.message + resPointOut.message;
+              if (dataPoint >= 0) {
+                this.totalPointByMount = dataPoint;
+              } else {
+                this.totalPointByMount = 0;
+              }
+            });
+        });
+      this.totalPointByYear = resData.message.totalPoint;
     });
   }
 
@@ -66,5 +96,7 @@ export class HistoryComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     this.dataHistoryInSub.unsubscribe();
+    this.dataHistoryInSub.unsubscribe();
+    this.dataPointOutSub.unsubscribe();
   }
 }

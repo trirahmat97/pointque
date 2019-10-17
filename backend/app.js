@@ -7,6 +7,10 @@ const path = require('path');
 const app = express();
 const nasabahRouter = require('./router/rNasabah');
 const transactionRouter = require('./router/rTransaction');
+const nasabahRouterOther = require('./router/rNasabahOther');
+const transactionRouterOther = require('./router/rTransactionOther');
+const configRewardRouterOther = require('./router/rConfigReward');
+const configRewardRouter = require('./router/rReward');
 
 //database
 const urlDB = "mongodb://127.0.0.1:27017/int-bank?retryWrites=true";
@@ -46,5 +50,9 @@ app.use(bodyParser.urlencoded({
 
 app.use("/api/int-bank/nasabah", nasabahRouter);
 app.use('/api/int-bank/transfer', transactionRouter);
+app.use("/api/int-bank/nasabahOther", nasabahRouterOther);
+app.use('/api/int-bank/transferOther', transactionRouterOther);
+app.use('/api/int-bank/configReward', configRewardRouterOther);
+app.use('/api/int-bank/reward', configRewardRouter);
 
 module.exports = app;

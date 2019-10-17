@@ -64,22 +64,26 @@
 // console.log(aa);
 // console.log(bb);
 // console.log(tomorrowDate);
-var month = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
 
 // var date = new Date("2019-12-01T00:00:00.000Z");
 // var hasilDate = new Date(new Date(date).setMonth(date.getMonth() + 1));
 
-var date = new Date();
-var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+// var valDate = "2019-10-08T07:55:14.701Z";
+// var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+// var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
 
 // console.log(month[date.getMonth()]);
-console.log(date);
-console.log(firstDay);
-console.log(lastDay);
+// console.log(firstDay);
+// console.log(lastDay);
 // console.log(hasilDate);
 
-// var date2 = new Date(new Date(date).setMonth(date.getMonth() + 1));
+var month = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+var date = new Date();
+var date2 = new Date(new Date(date).setMonth(date.getMonth() + 1));
+var getMonth1 = date.getFullYear() + "-" + month[date.getMonth()];
+var getMonth2 = date.getFullYear() + "-" + month[date2.getMonth()];
+console.log(date, getMonth1);
+console.log(date2, getMonth2);
 
 // console.log(date.getFullYear(), date.getMonth(), date.getDate());
 // console.log(date2);

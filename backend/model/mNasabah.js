@@ -79,6 +79,10 @@ const nasabahSchema = mongoose.Schema({
     type: String,
     default: 2,
     required: true
+  },
+  codeBank: {
+    type: String,
+    default: '123'
   }
 }, {
   timestamps: true

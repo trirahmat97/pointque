@@ -1,0 +1,33 @@
+<div class="container">
+  <mat-card style="height: 90%; width: 90%;">
+    <div class="example-container">
+      <mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="norek" sticky>
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span *ngIf="element.name != nameUser">
+              {{element.name | replace:'[a-z]':'*'}}
+            </span>
+            <span *ngIf="element.name == nameUser">
+              {{nameUser}}
+            </span>
+          </mat-cell>
+          <!-- <mat-cell *matCellDef="let element" *ngIf="element.name == nameUser">{{nameUser}}</mat-cell> -->
+        </ng-container>
+
+        <ng-container matColumnDef="point" sticky>
+          <mat-header-cell *matHeaderCellDef mat-sort-header>point</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button mat-mini-fab color="primary">{{element.point}}</button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayColumns; sticky: true"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayColumns"></mat-row>
+      </mat-table>
+      <!-- <mat-spinner *ngIf="isLoading"></!-->
+    </div>
+    <mat-paginator [length]="totalPostIn" [pageSize]="postPerpageIn" [pageSizeOptions]="pageSizeOptionIn">
+    </mat-paginator>
+  </mat-card>
+</div>

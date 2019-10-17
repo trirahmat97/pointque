@@ -5,6 +5,7 @@ import { TransferService } from '../admin/service/transfer.service';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { MatSnackBar } from '@angular/material';
+import { OtherService } from '../admin/service/other.service';
 
 @Component({
   selector: 'app-send',
@@ -24,7 +25,8 @@ export class SendComponent implements OnInit, OnDestroy {
     private serviceNasabah: NasabahService,
     private transferService: TransferService,
     private authService: AuthService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private serviceOther: OtherService
   ) { }
 
   ngOnInit() {
@@ -33,8 +35,8 @@ export class SendComponent implements OnInit, OnDestroy {
       norek: new FormControl(null, { validators: [Validators.required] }),
       receiver: new FormControl('', { validators: [Validators.required] }),
       amount: new FormControl(null, { validators: [Validators.required, Validators.min(20000)] }),
-      pin: new FormControl(null, { validators: [Validators.required, Validators.maxLength(6)] }),
-      description: new FormControl(null)
+      pin: new FormControl(null, { validators: [Validators.required, Validators.maxLength(6), Validators.minLength(6)] }),
+      description: new FormControl(null),
     });
     this.authListenerSubs = this.authService.getAuthStatusListener().subscribe(isAuthentication => {
       this.userId = isAuthentication.userId;
@@ -48,28 +50,53 @@ export class SendComponent implements OnInit, OnDestroy {
 
   //find nasabah
   onFind() {
+    let findBank = this.formSend.value.bank;
     let norek = this.formSend.value.norek;
-    this.serviceNasabah.getNasabahById(norek).subscribe(resData => {
-      if (resData.responseCode == '00') {
+    if (findBank == 'pointque') {
+      this.serviceNasabah.getNasabahById(norek).subscribe(resData => {
+        if (resData.responseCode == '00') {
+          this.formSend.setValue({
+            bank: 'pointque',
+            receiver: resData.message.name,
+            norek: this.formSend.value.norek,
+            amount: 0,
+            pin: null,
+            description: null
+          });
+        }
+      }, err => {
         this.formSend.setValue({
           bank: 'pointque',
-          receiver: resData.message.name,
+          receiver: '',
           norek: this.formSend.value.norek,
           amount: 0,
           pin: null,
           description: null
         });
-      }
-    }, err => {
-      this.formSend.setValue({
-        bank: 'pointque',
-        receiver: '',
-        norek: this.formSend.value.norek,
-        amount: 0,
-        pin: null,
-        description: null
       });
-    });
+    } else {
+      this.serviceOther.inquryNasabah(norek).subscribe(resData => {
+        if (resData.responseCode == '00') {
+          this.formSend.setValue({
+            bank: 'gbank',
+            receiver: resData.message.name,
+            norek: this.formSend.value.norek,
+            amount: 0,
+            pin: null,
+            description: null
+          });
+        }
+      }, err => {
+        this.formSend.setValue({
+          bank: 'gbank',
+          receiver: '',
+          norek: this.formSend.value.norek,
+          amount: 0,
+          pin: null,
+          description: null
+        });
+      });
+    }
   }
 
 
@@ -77,27 +104,73 @@ export class SendComponent implements OnInit, OnDestroy {
     if (this.formSend.invalid) {
       return false;
     }
-    this.transferService.transferPointque(
-      this.sender,
-      this.formSend.value.norek,
-      this.formSend.value.amount,
-      this.formSend.value.pin,
-      this.formSend.value.description
-    ).subscribe(resData => {
-      this._snackBar.open(resData.message, 'Transfer!', {
-        duration: 2500,
-      });
-      this.formSend.setValue({
-        bank: 'pointque',
-        receiver: '',
-        norek: this.formSend.value.norek,
-        amount: 0,
-        pin: null,
-        description: null
-      });
-    }, err => {
 
-    })
+    let findBank = this.formSend.value.bank;
+    if (findBank == 'pointque') {
+      this.transferService.transferPointque(
+        this.sender,
+        this.formSend.value.norek,
+        this.formSend.value.amount,
+        this.formSend.value.pin,
+        this.formSend.value.description,
+      ).subscribe(resData => {
+        this._snackBar.open(resData.message, 'Transfer!', {
+          duration: 2500,
+        });
+        this.formSend.setValue({
+          bank: 'pointque',
+          receiver: '',
+          norek: this.formSend.value.norek,
+          amount: 0,
+          pin: null,
+          description: null
+        });
+      }, err => {
+
+      })
+    } else {
+      this.serviceNasabah.getNasabahNorekPin(this.sender, this.formSend.value.pin)
+        .subscribe(dataPin => {
+          if (dataPin.message.length == 1) {
+            this.serviceOther.transfer(
+              this.sender,
+              dataPin.message.namem,
+              this.formSend.value.norek,
+              this.formSend.value.amount,
+              this.formSend.value.description,
+            ).subscribe(dataTf => {
+              if (dataTf.responseCode == '00') {
+                this.transferService.transferOut(
+                  this.sender,
+                  this.formSend.value.norek,
+                  this.formSend.value.receiver,
+                  this.formSend.value.amount,
+                  this.formSend.value.pin,
+                  this.formSend.value.description,
+                ).subscribe(dataTrans => {
+                  this._snackBar.open(dataTrans.message + ' : ' + this.formSend.value.receiver, 'Transfer!', {
+                    duration: 2500,
+                  });
+                  this.formSend.setValue({
+                    bank: 'gbank',
+                    receiver: '',
+                    norek: this.formSend.value.norek,
+                    amount: 0,
+                    pin: null,
+                    description: null
+                  });
+                })
+              }
+            });
+
+            console.log(dataPin);
+          }
+        }, err => {
+
+        })
+      console.log('gbank');
+    }
+
   }
 
   ngOnDestroy() {

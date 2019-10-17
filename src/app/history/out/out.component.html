@@ -26,7 +26,8 @@
       <ng-container matColumnDef="point">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Point</mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <button mat-mini-fab color="accent">{{element.point}}</button>
+          <button mat-mini-fab color="accent">+{{element.point}}</button>
+          <!-- <button mat-mini-fab color="primary" *ngIf="element.point >= 0">+{{element.point}}</button> -->
         </mat-cell>
       </ng-container>
 

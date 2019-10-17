@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 const BACKEND_URL = environment.apiUrl + "/nasabah/";
+const BACKEND_URL_OTHER = environment.apiUrl + "/nasabah/";
 
 @Injectable({
   providedIn: 'root'
@@ -68,6 +69,21 @@ export class NasabahService {
       }))
   }
 
+  getNasabahNorekPin(norek: string, pin: string) {
+    const data = {
+      norek: norek,
+      pin: pin
+    }
+    return this.http.post<{ responseCode: string, responseDesc: string, message: any }>
+      (BACKEND_URL + '/check', data).pipe(map(resData => {
+        return {
+          responseCode: resData.responseCode,
+          responseDesc: resData.responseDesc,
+          message: resData.message
+        }
+      }));
+  }
+
   getNasabahByUserId(userId: string) {
     return this.http.get<{ responseCode: string, responseDesc: string, message: any }>
       (BACKEND_URL + 'user/' + userId).pipe(map(resData => {
@@ -77,6 +93,11 @@ export class NasabahService {
           message: resData.message
         }
       }))
+  }
+
+  getNasabahById2(norek: string) {
+    return this.http.get<{ responseCode: string, responseDesc: string, message: any }>
+      (BACKEND_URL + 'getNasabah/' + norek);
   }
 
   getNasabahListener() {

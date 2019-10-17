@@ -8,6 +8,7 @@ import { GrafikComponent } from './grafik/grafik.component';
 import { HistoryComponent } from './history/history.component';
 import { AuthService } from './auth/auth.service';
 import { SendComponent } from './send/send.component';
+import { AdminSettingComponent } from './admin-setting/admin-setting.component';
 
 
 const routes: Routes = [
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'nasabah', component: NasabahComponent, canActivate: [AuthGuard] },
   { path: 'grafik', component: GrafikComponent, canActivate: [AuthGuard] },
   { path: 'history', component: HistoryComponent, canActivate: [AuthGuard] },
-  { path: 'send', component: SendComponent, canActivate: [AuthGuard] }
+  { path: 'send', component: SendComponent, canActivate: [AuthGuard] },
+  { path: 'setapp', component: AdminSettingComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

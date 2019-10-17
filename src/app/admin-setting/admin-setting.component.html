@@ -1,0 +1,96 @@
+<div class="container">
+  <mat-grid-list cols="6" rowHeight="190px">
+    <mat-grid-tile colspan="3" rowspan="3">
+      <mat-card style="height: 90%; width: 90%;">
+        <section *ngIf="dataSearchReward == true">
+          <h4>Search Reward!</h4>
+          <form [formGroup]="formSearch" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px"
+            *ngIf="dataSearchPoint == true">
+            <mat-form-field hintLabel="">
+              <input type="text" matInput placeholder="Jumlah Point" formControlName="point">
+              <mat-error *ngIf="formSearch.get('point').invalid">Field enter Norek!</mat-error>
+            </mat-form-field>
+
+            <mat-form-field hintLabel="">
+              <input type="text" matInput placeholder="Jumlah Pemenang" formControlName="jumlah">
+              <mat-error *ngIf="formSearch.get('jumlah').invalid">Field enter Norek!</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput [matDatepicker]="dp" placeholder="Month and Year" [formControl]="date"
+                formControlName="date">
+              <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+              <mat-datepicker #dp startView="multi-year" (yearSelected)="chosenYearHandler($event)"
+                (monthSelected)="chosenMonthHandler($event, dp)" panelClass="example-month-picker">
+              </mat-datepicker>
+            </mat-form-field>
+
+            <mat-checkbox formControlName="reward" color="primary">Send Reward Otomatic!</mat-checkbox>
+
+            <button type="submit" mat-raised-button color="primary" [disabled]="formSearch.invalid"
+              (click)="onSend()">Search and Random</button>
+          </form>
+
+          <!-- table -->
+          <div class="table-search" style="margin-top: 10px;" *ngIf="dataSource2.data.length >= 1">
+            <mat-table mat-table [dataSource]="dataSource2" class="mat-elevation-z8">
+              <ng-container matColumnDef="name2">
+                <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="point2" sticky>
+                <mat-header-cell *matHeaderCellDef>Point</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.point}}</mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="action" sticky>
+                <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.point2}}</mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="status" sticky>
+                <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.status}}</mat-cell>
+              </ng-container>
+              <mat-header-row *matHeaderRowDef="displayColumnsSearch; sticky: true"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayColumnsSearch"></mat-row>
+            </mat-table>
+          </div>
+        </section>
+      </mat-card>
+    </mat-grid-tile>
+
+
+    <mat-grid-tile colspan="3" rowspan="3">
+      <mat-card style="height: 90%; width: 90%;">
+        <div fxLayoutAlign="center center" class="filter">
+          <mat-form-field fxFlex="40%">
+            <input type="input" matInput (keyup)="doFilterIn($event.target.value)" placeholder="Search Point">
+          </mat-form-field>
+        </div>
+        <div class="example-container">
+          <mat-table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="norek" sticky>
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+              <mat-cell *matCellDef="let element">{{element.name}} | {{element._id}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="point" sticky>
+              <mat-header-cell *matHeaderCellDef mat-sort-header>point</mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <button mat-mini-fab color="primary">{{element.point}}</button>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayColumns; sticky: true"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayColumns"></mat-row>
+          </mat-table>
+          <!-- <mat-spinner *ngIf="isLoading"></!-->
+        </div>
+        <mat-paginator [length]="totalPostIn" [pageSize]="postPerpageIn" [pageSizeOptions]="pageSizeOptionIn">
+        </mat-paginator>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

@@ -13,5 +13,77 @@ $lte    : <
 $lt     : < 
 
 gte = lt
-db.getCollection('nasabahs').find({createdAt: {"$lt": new Date("2019-10"), "$gte": new Date("2019-09"), }}).count()
+db.getCollection('nasabahs').find({createdAt: {"$lt": new Date("2019-10"), "$gte": new Date("2019-09")}}).count()
 https://stackoverflow.com/questions/2943222/find-objects-between-two-dates-mongodb
+
+db.getCollection('transactions').aggregate([
+    { $match: { sender: "457860321", type: "D" } },
+    { $group: { _id: null, amount: { $sum: "$point"} } }
+])
+
+db.getCollection('transactions').aggregate([
+    { $match: { type: "D", createdAt: {"$lt": new Date("2019-11"), "$gte": new Date("2019-10")} } },
+    { $group: { _id: "$sender", amount: { $sum: "$point"} } }
+])
+
+
+<div class="container-admin" *ngIf="level == 1">
+  <div class="content-kiri" style="border: 1px solid red; float: left; width: 74%;">
+    <mat-grid-list cols="5" rowHeight="120px">
+      <mat-grid-tile colspan="3" rowspan="3">
+        1
+      </mat-grid-tile>
+      <mat-grid-tile colspan="2" rowspan="4" style="background: white; height: 90%; width: 98%;">
+        <!-- data PointQ -->
+        <mat-tab-group style="background: white; height: 100%; ">
+          <mat-tab label="First">
+            <!-- <app-admin-setting></app-admin-setting> -->
+          </mat-tab>
+          <mat-tab label="Second"> Content 2 </mat-tab>
+        </mat-tab-group>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="1">
+        2
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="1">
+        2
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="1">
+        2
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+  <div class="content-kanan" style="border: 1px solid blue; float: right; width: 25%;">
+
+  </div>
+  <!-- <mat-grid-list cols="7" rowHeight="450px" gutterSize="5px">
+    <mat-grid-tile colspan="5">
+      <div class="kiri">
+        kiri 
+      </div>
+
+      <div class="kanan">
+        kanan
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="2">
+      <mat-card class="content-pointq" style="height: 90%; width:90%">
+        <mat-list>
+          <h3 mat-subheader>
+            <mat-icon color="primary" mat-list-icon>sort</mat-icon> 3 Max PointQ
+          </h3>
+          <mat-card style="margin: 5px" *ngFor="let data of dataNasabah">
+            <mat-list-item>
+              <mat-icon color="primary" mat-list-icon>account_circle</mat-icon>
+              <h4 mat-line>{{data.name}}</h4>
+              <p mat-line>{{data.norek}}</p>
+              <button mat-fab color="primary">
+                {{data.totalPoint}}
+              </button>
+            </mat-list-item>
+          </mat-card>
+        </mat-list>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list> -->
+</div>

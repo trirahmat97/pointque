@@ -8,7 +8,7 @@ const transactionSchema = mongoose.Schema({
   },
   senderName: {
     type: String,
-    required: true,
+    // required: true,
     trim: true
   },
   receiver: {
@@ -18,7 +18,7 @@ const transactionSchema = mongoose.Schema({
   },
   receiverName: {
     type: String,
-    required: true,
+    // required: true,
     trim: true
   },
   amount: {
@@ -31,9 +31,17 @@ const transactionSchema = mongoose.Schema({
   },
   point: {
     type: Number,
-    required: true
+    trim: true
   },
   description: {
+    type: String,
+    trim: true
+  },
+  senderBank: {
+    type: String,
+    trim: true
+  },
+  receiverBank: {
     type: String,
     trim: true
   }

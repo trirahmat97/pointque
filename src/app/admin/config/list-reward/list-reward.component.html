@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="table">
+    <div fxLayoutAlign="center center">
+      <mat-form-field fxFlex="40%">
+        <input type="input" matInput (keyup)="doFilter($event.target.value)" placeholder="Search ..">
+      </mat-form-field>
+    </div>
+    <div class="example-container">
+      <mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="name" sticky>
+          <mat-header-cell *matHeaderCellDef mat-sort-header>name</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="jumlah">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Sum</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.jumlah}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="point">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Point</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.point}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="reward">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Reward</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.hadiah | currency: "Rp"}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>action</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button mat-mini-fab color="primary" aria-label="active"
+              (click)="onChangeStatus(element.status, element.norek)" *ngIf="element.status == 1">
+              <mat-icon>lock_open</mat-icon>
+            </button>
+            <button mat-mini-fab color="warn" aria-label="non-active"
+              (click)="onChangeStatus(element.status, element.norek)" *ngIf="element.status == 2">
+              <mat-icon>lock</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayColumns; sticky: true"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayColumns"></mat-row>
+      </mat-table>
+      <!-- <mat-spinner *ngIf="isLoading"></!-->
+    </div>
+    <mat-paginator [length]="totalPost" [pageSize]="postPerpage" [pageSizeOptions]="pageSizeOption">
+    </mat-paginator>
+  </div>
+</div>

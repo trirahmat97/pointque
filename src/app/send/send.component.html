@@ -6,6 +6,7 @@
       <mat-form-field hintLabel="Pilih Bank">
         <mat-select formControlName="bank">
           <mat-option value="pointque">PointQue</mat-option>
+          <mat-option value="gbank">G-Bank</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field hintLabel="Rekening Tujuan">
@@ -29,10 +30,7 @@
       </mat-form-field>
 
       <mat-form-field hintLabel="Amount" *ngIf="formSend.get('receiver').valid">
-        <!-- <mat-slider thumbLabel [(displayWith)]="formatLabel" tickInterval="1" min="1" max="100000" color="primary">
-        </mat-slider> -->
         <input type="number" matInput placeholder="" formControlName="amount">
-        <!-- <mat-error *ngIf="formSend.get('amount').invalid">Failed Amount!</mat-error> -->
       </mat-form-field>
 
       <mat-form-field hintLabel="PIN" *ngIf="formSend.get('amount').valid">
@@ -44,10 +42,10 @@
       </mat-form-field>
 
 
-      <mat-form-field *ngIf="formSend.get('amount').valid" hintLabel="Amount">
-        <input matInput #message maxlength="100" placeholder="Message" formControlName="description">
+      <mat-form-field *ngIf="formSend.get('amount').valid">
+        <input matInput #message maxlength="40" placeholder="Message" formControlName="description">
         <mat-hint align="start"><strong>Caracter</strong> </mat-hint>
-        <mat-hint align="end">{{message.value.length}} / 100</mat-hint>
+        <mat-hint align="end">{{message.value.length}} / 40</mat-hint>
       </mat-form-field>
 
       <button class="hu" mat-flat-button color="primary" [disabled]="formSend.invalid" *ngIf="!isLoading"

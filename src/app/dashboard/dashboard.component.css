@@ -23,3 +23,7 @@
 mat-chip {
   max-width: 98%;
 }
+
+.container-admin {
+  margin-left: 10px;
+}

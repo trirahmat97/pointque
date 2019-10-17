@@ -24,6 +24,10 @@ import { ErrorComponent } from './error/error.component';
 import { ErrorInterceptor } from './error.interceptor';
 import { FooterComponent } from './template/footer/footer.component';
 import { OutComponent } from './history/out/out.component';
+import { AdminSettingComponent } from './admin-setting/admin-setting.component';
+import { ReplacePipe } from './admin/pipe/replace.pipe';
+import { ListRewardComponent } from './admin/config/list-reward/list-reward.component';
+import { PointMaxMountComponent } from './point-max-mount/point-max-mount.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +44,10 @@ import { OutComponent } from './history/out/out.component';
     ErrorComponent,
     FooterComponent,
     OutComponent,
+    AdminSettingComponent,
+    ReplacePipe,
+    ListRewardComponent,
+    PointMaxMountComponent
   ],
   imports: [
     BrowserModule,

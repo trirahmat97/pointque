@@ -34,13 +34,48 @@ exports.createNasabah = (req, res, next) => {
     });
 }
 
+//norek and pin
+exports.getNasabahNorekPin = (req, res, next) => {
+  Nasabah.find({
+    norek: req.body.norek,
+    pin: req.body.pin
+  }).then(nasabah => {
+    if (nasabah) {
+      if (nasabah.length == 1) {
+        return res.status(200).json({
+          responseCode: '00',
+          responseDesc: 'Success!',
+          message: nasabah
+        });
+      } else {
+        return res.status(400).json({
+          responseCode: '11',
+          responseDesc: 'Invalid!',
+          message: 'Invalid PIN'
+        });
+      }
+    } else {
+      res.status(404).json({
+        responseCode: '04',
+        responseDesc: 'No Foud!',
+        message: 'Data note fund'
+      });
+    }
+  }).catch(err => {
+    res.status(500).json({
+      responseCode: '11',
+      responseDesc: 'Invailid!',
+      message: 'Fetching posts failed!'
+    })
+  })
+}
+
 //inquiry
 exports.getNasabah = (req, res, next) => {
   Nasabah.findOne({
     norek: req.params.norek
   }).then(nasabah => {
     if (nasabah) {
-      const date = new Date(nasabah.createdAt);
       return res.status(200).json({
         responseCode: '00',
         responseDesc: 'Success!',
