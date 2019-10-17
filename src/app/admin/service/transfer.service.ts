@@ -95,7 +95,6 @@ export class TransferService {
       (BACKEND_REWARD + 'list')
       .pipe(
         map(resData => {
-          // console.log(resData);
           return {
             responseCode: resData.responseCode,
             responseDesc: resData.responseDesc,
