@@ -32,14 +32,14 @@
 
 
 <div class="container-user" *ngIf="level == 2">
-  <mat-grid-list cols="7" rowHeight="130px" gutterSize="10px">
+  <mat-grid-list cols="7" rowHeight="132px" gutterSize="10px">
     <mat-grid-tile colspan="3" rowspan="4" style="background:white">
       <mat-card style="height: 98%; width: 100%; margin-top: 5px;">
         <mat-card-header>
           <div mat-card-avatar class=" example-header-image">
           </div>
           <mat-card-title>{{dataUser.name}}</mat-card-title>
-          <mat-card-subtitle>Rekening : {{dataUser.norek}}</mat-card-subtitle>
+          <mat-card-subtitle>{{dataUser.norek}}</mat-card-subtitle>
           <mat-card-subtitle>{{dataUser.balance | currency:"Rp "}}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>

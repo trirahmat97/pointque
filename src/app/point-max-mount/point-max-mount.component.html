@@ -16,9 +16,16 @@
         </ng-container>
 
         <ng-container matColumnDef="point" sticky>
-          <mat-header-cell *matHeaderCellDef mat-sort-header>point</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header>status</mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <button mat-mini-fab color="primary">{{element.point}}</button>
+            <mat-chip-list class="mat-chip-list-stacked" *ngIf="element.name == nameUser">
+              <mat-chip color="primary" selected>
+                <mat-icon>check_circle</mat-icon> Mengikuti!
+              </mat-chip>
+            </mat-chip-list>
+            <!-- <button mat-mini-fab color="primary" *ngIf="element.name != nameUser"> -->
+            <mat-icon *ngIf="element.name != nameUser" color="primary">check_circle</mat-icon>
+            <!-- </button> -->
           </mat-cell>
         </ng-container>
 

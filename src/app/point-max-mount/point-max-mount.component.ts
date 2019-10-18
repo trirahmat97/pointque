@@ -20,7 +20,7 @@ export class PointMaxMountComponent implements OnInit, AfterViewInit, OnDestroy 
   private dataPointOutAllSub: Subscription;
   private dataSorting = [];
   private dataSorting3 = [];
-  setBulanan3 = 10;
+  setBulanan = 30;
 
   displayColumns = ['norek', 'point'];
   dataSource = new MatTableDataSource<PoitnData>();
@@ -64,7 +64,7 @@ export class PointMaxMountComponent implements OnInit, AfterViewInit, OnDestroy 
             const dataJadi = new Set(this.dataSorting)
             const dataJadi2 = [...dataJadi];
             for (let u = 0; u < dataJadi2.length; u++) {
-              if (dataJadi2[u].point >= this.setBulanan3) {
+              if (dataJadi2[u].point >= this.setBulanan) {
                 this.dataSorting3.push(dataJadi2[u]);
               }
             }
