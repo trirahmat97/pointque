@@ -1,8 +1,8 @@
 <div class="container">
   <mat-grid-list cols="6" rowHeight="190px">
     <mat-grid-tile colspan="3" rowspan="3">
-      <mat-card style="height: 90%; width: 90%;">
-        <section *ngIf="dataSearchReward == true">
+      <mat-card style="height: 90%; width: 90%;" *ngIf="dataSearchReward == true">
+        <section>
           <h4>Search Reward!</h4>
           <form [formGroup]="formSearch" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px"
             *ngIf="dataSearchPoint == true">
@@ -43,27 +43,23 @@
                 <mat-header-cell *matHeaderCellDef>Point</mat-header-cell>
                 <mat-cell *matCellDef="let element">{{element.point}}</mat-cell>
               </ng-container>
-
-              <ng-container matColumnDef="action" sticky>
-                <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{element.point2}}</mat-cell>
-              </ng-container>
-
-              <ng-container matColumnDef="status" sticky>
-                <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{element.status}}</mat-cell>
-              </ng-container>
               <mat-header-row *matHeaderRowDef="displayColumnsSearch; sticky: true"></mat-header-row>
               <mat-row *matRowDef="let row; columns: displayColumnsSearch"></mat-row>
             </mat-table>
           </div>
         </section>
       </mat-card>
+      <mat-card class="icon-berakhir" *ngIf="dataSearchReward == false">
+        <button mat-fab color="primary">
+          <mat-icon>check_circle</mat-icon>
+        </button>
+        <h5>Reward Berakhir!</h5>
+      </mat-card>
     </mat-grid-tile>
 
 
     <mat-grid-tile colspan="3" rowspan="3">
-      <mat-card style="height: 90%; width: 90%;">
+      <mat-card style="height: 90%; width: 90%;" *ngIf="dataSearchReward == true">
         <div fxLayoutAlign="center center" class="filter">
           <mat-form-field fxFlex="40%">
             <input type="input" matInput (keyup)="doFilterIn($event.target.value)" placeholder="Search Point">
@@ -90,6 +86,10 @@
         </div>
         <mat-paginator [length]="totalPostIn" [pageSize]="postPerpageIn" [pageSizeOptions]="pageSizeOptionIn">
         </mat-paginator>
+      </mat-card>
+
+      <mat-card style="height: 90%; width: 90%;" *ngIf="dataSearchReward == false">
+        <app-data-reward></app-data-reward>
       </mat-card>
     </mat-grid-tile>
   </mat-grid-list>

@@ -262,7 +262,7 @@ exports.getMaxNasabah = (req, res, next) => {
     level: '2',
   }).sort({
     "totalPoint": -1
-  }).limit(3).then(nasabah => {
+  }).limit(5).then(nasabah => {
     if (nasabah) {
       const date = new Date(nasabah.createdAt);
       return res.status(200).json({

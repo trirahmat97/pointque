@@ -1,0 +1,51 @@
+<div class="container">
+  <div fxLayoutAlign="center center" class="filter">
+    <mat-form-field fxFlex="40%">
+      <input type="input" matInput (keyup)="doFilterIn($event.target.value)" placeholder="Search Point">
+    </mat-form-field>
+  </div>
+  <div class="example-container">
+    <mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="norek" sticky>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.name}} | {{element.norek}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="point" sticky>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>point</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button mat-mini-fab color="primary">{{element.point}}</button>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="hadiah" sticky>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Nominal</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{element.hadiah | currency:"Rp "}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="date" sticky>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Date</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{element.date | date}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="status" sticky>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <mat-chip-list>
+            <mat-chip selected>Sukses!</mat-chip>
+          </mat-chip-list>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayColumns; sticky: true"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayColumns"></mat-row>
+    </mat-table>
+    <!-- <mat-spinner *ngIf="isLoading"></!-->
+  </div>
+  <mat-paginator [length]="totalPostIn" [pageSize]="postPerpageIn" [pageSizeOptions]="pageSizeOptionIn">
+  </mat-paginator>
+</div>

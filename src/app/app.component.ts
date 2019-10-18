@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
 export class AppComponent implements OnInit, OnDestroy {
 
   userIsAuthenticated = false;
-  title = 'int-bank';
+  title = 'pointKuy!';
   private authListenerSubs: Subscription;
 
   constructor(private authService: AuthService) { }

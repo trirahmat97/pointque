@@ -20,7 +20,7 @@ export class OutComponent implements OnInit, AfterViewInit, OnDestroy {
   //history out
   dataHistoryOut: TransferData[] = [];
   dataHistoryOutSub: Subscription;
-  displayColumnsOut = ['receiver', 'rekeningout', 'amountout', 'point', 'dateout'];
+  displayColumnsOut = ['receiver', 'rekeningout', 'amountout', 'point', 'dateout', 'bank'];
   dataSourceOut = new MatTableDataSource<TransferData>();
 
   @ViewChild(MatSort, { static: false }) sortOut: MatSort;

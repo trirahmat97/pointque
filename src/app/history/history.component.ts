@@ -19,7 +19,8 @@ export class HistoryComponent implements OnInit, AfterViewInit, OnDestroy {
     private transferService: TransferService
   ) { }
 
-
+  setBulanan = 100;
+  setTahunan = 1200;
 
   //poitn
   progress = 0;
@@ -35,7 +36,7 @@ export class HistoryComponent implements OnInit, AfterViewInit, OnDestroy {
   //history in
   dataHistoryIn: TransferData[] = [];
   dataHistoryInSub: Subscription;
-  displayColumnsIn = ['sender', 'rekeningin', 'amountin', 'point', 'datein'];
+  displayColumnsIn = ['sender', 'rekeningin', 'amountin', 'point', 'datein', 'bank'];
   dataSourceIn = new MatTableDataSource<TransferData>();
 
   //config tabel
@@ -57,15 +58,12 @@ export class HistoryComponent implements OnInit, AfterViewInit, OnDestroy {
     this.serviceNasabah.getNasabahByUserId(this.userId2).subscribe(resData => {
       this.norek = resData.message.norek;
       this.name = resData.message.name;
-      console.log(this.name);
-
       this.transferService.historyTransferInListByNorek(this.norek, this.postPerPageIn, this.currentPageIn);
       this.dataHistoryInSub = this.transferService.getTransferInListener()
         .subscribe((resDataHistoryIn: { message: TransferData[], maxInHistory: number }) => {
           this.dataHistoryIn = resDataHistoryIn.message;
           this.dataSourceIn.data = this.dataHistoryIn.slice();
         });
-      //pointIn
       this.dataHistoryInSub = this.transferService.getInSumPointMountByNorek(this.norek);
       this.dataHistoryInSub = this.transferService.getOutSumPointMountByNorek(this.norek);
       this.dataPointInSub = this.transferService.getInSumPointMountByNorekListener()
@@ -97,6 +95,6 @@ export class HistoryComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy() {
     this.dataHistoryInSub.unsubscribe();
     this.dataHistoryInSub.unsubscribe();
-    this.dataPointOutSub.unsubscribe();
+    // this.dataPointOutSub.unsubscribe();
   }
 }

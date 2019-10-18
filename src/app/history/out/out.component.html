@@ -27,7 +27,15 @@
         <mat-header-cell *matHeaderCellDef mat-sort-header>Point</mat-header-cell>
         <mat-cell *matCellDef="let element">
           <button mat-mini-fab color="accent">+{{element.point}}</button>
-          <!-- <button mat-mini-fab color="primary" *ngIf="element.point >= 0">+{{element.point}}</button> -->
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="bank">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Bank</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <mat-chip-list aria-label="Fish selection">
+            <mat-chip color="accent" selected> {{element.receiverBank}}</mat-chip>
+          </mat-chip-list>
         </mat-cell>
       </ng-container>
 

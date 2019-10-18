@@ -6,6 +6,7 @@ const controlerTransaction = require('../controller/cTransaction');
 
 router.post('', authNasabah, controlerTransaction.transfer);
 router.post('/tf/out', authNasabah, controlerTransaction.transfertfOut);
+router.post('/tf/in', authNasabah, controlerTransaction.transfertfIn);
 
 router.get('/in', authNasabah, controlerTransaction.transferIn);
 router.get('/in/count/:norek', authNasabah, controlerTransaction.transferInCount);

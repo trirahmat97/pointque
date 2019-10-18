@@ -40,6 +40,10 @@ export const MY_FORMATS = {
   ],
 })
 export class AdminSettingComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  //set
+  setBulan = 1;
+
   dataPointInAll: Poitn2Data[] = [];
   dataPointOutAll: Poitn2Data[] = [];
   private dataPointInAllSub: Subscription;
@@ -49,7 +53,7 @@ export class AdminSettingComponent implements OnInit, AfterViewInit, OnDestroy {
   private dataSorting2: Poitn2Data[] = [];
 
   //table
-  displayColumnsSearch = ['name2', 'point2', 'action', 'status'];
+  displayColumnsSearch = ['name2', 'point2'];
   displayColumns = ['norek', 'point'];
   dataSource = new MatTableDataSource<PoitnData>();
   dataSource2 = new MatTableDataSource<PoitnData>();
@@ -90,20 +94,19 @@ export class AdminSettingComponent implements OnInit, AfterViewInit, OnDestroy {
     this.serviceTransfer.getOutPointAll();
     this.getDataNasabahPoint();
     this.formSearch = new FormGroup({
-      point: new FormControl(null, { validators: [Validators.required] }),
+      point: new FormControl(this.setBulan, { validators: [Validators.required] }),
       jumlah: new FormControl(null, { validators: [Validators.required] }),
       date: new FormControl(moment()),
       reward: new FormControl(false),
     });
-    // this.serviceTransfer.getReward();
-    // this.rewardSub = this.serviceTransfer.getRewardListener()
-    //   .subscribe((rewardData: { message: RewardModel[], maxReward: number }) => {
-    //     // this.dataSource2.data = rewardData.message.slice();
-    //     console.log(rewardData.message);
-    //     if (rewardData.message.length > 0) {
-    //       this.dataSearchReward = false;
-    //     }
-    //   });
+    this.serviceTransfer.getReward();
+    this.rewardSub = this.serviceTransfer.getRewardListener()
+      .subscribe((rewardData: { message: RewardModel[], maxReward: number }) => {
+        // console.log(rewardData.message);
+        if (rewardData.message.length > 0) {
+          this.dataSearchReward = false;
+        }
+      });
   }
 
   //filter point
@@ -188,29 +191,18 @@ export class AdminSettingComponent implements OnInit, AfterViewInit, OnDestroy {
                   tampungPemenang[x].point,
                   type
                 ).subscribe(data => {
-                  // console.log(data);
                 });
               }
-              // this.serviceTransfer.getReward();
+              this.dataSource2.data = tampungPemenang.slice();
               this.dataSearchPoint = true;
               this.formSearch.reset();
               this.formSearch.setValue({
-                point: null,
+                point: this.setBulan,
                 jumlah: null,
                 date: moment(),
                 reward: false
               });
-              // this.rewardSub = this.serviceTransfer.getRewardListener()
-              //   .subscribe((rewardData: { message: RewardModel[], maxReward: number }) => {
-              //     this.dataSource2.data = rewardData.message.slice();
-
-              //   });
-              // .subscribe(dataReward => {
-              //   console.log(dataReward);
-              //   this.dataSource2.data = dataReward.message.slice();
-              //   console.log(this.dataSource2.data);
-              //   
-              // });
+              location.reload();
             }
           });
       });
@@ -237,7 +229,7 @@ export class AdminSettingComponent implements OnInit, AfterViewInit, OnDestroy {
             const dataJadi = new Set(this.dataSorting)
             const dataJadi2 = [...dataJadi];
             for (let u = 0; u < dataJadi2.length; u++) {
-              if (dataJadi2[u].point >= this.setBulanan3) {
+              if (dataJadi2[u].point >= this.setBulan) {
                 this.dataSorting3.push(dataJadi2[u]);
               }
             }

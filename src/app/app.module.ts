@@ -28,6 +28,7 @@ import { AdminSettingComponent } from './admin-setting/admin-setting.component';
 import { ReplacePipe } from './admin/pipe/replace.pipe';
 import { ListRewardComponent } from './admin/config/list-reward/list-reward.component';
 import { PointMaxMountComponent } from './point-max-mount/point-max-mount.component';
+import { DataRewardComponent } from './data-reward/data-reward.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { PointMaxMountComponent } from './point-max-mount/point-max-mount.compon
     AdminSettingComponent,
     ReplacePipe,
     ListRewardComponent,
-    PointMaxMountComponent
+    PointMaxMountComponent,
+    DataRewardComponent
   ],
   imports: [
     BrowserModule,

@@ -6,4 +6,6 @@ export interface TransferData {
     receiverName: string;
     amount: number;
     description: string;
+    receiverBank: string;
+    senderBank: string;
 } 

@@ -30,14 +30,14 @@ exports.send = (req, res, next) => {
     });
     configReward.save().then(result => {
       const transferReceiver = new Transaction({
-        sender: '123',
-        senderName: 'pointque',
+        sender: 'pointKuy!',
+        senderName: 'pointKuy!',
         receiver: req.body.norek,
         receiverName: receiver.name,
         amount: req.body.hadiah,
         type: 'C',
         point: '0',
-        receiverBank: 'pointque',
+        senderBank: 'pointKuy!',
         description: 'Reward'
       });
       transferReceiver.save().then(result2 => {
@@ -100,22 +100,4 @@ exports.listBulan = (req, res, next) => {
       message: e.message
     })
   });
-  // Reward.find({
-  //   createdAt: {
-  //     "$lt": new Date(getMonth2),
-  //     "$gte": new Date(getMonth1),
-  //   }
-  // }).then(dataReward => {
-  //   res.status(200).json({
-  //     responseCode: '00',
-  //     responseDesc: 'Sucess!',
-  //     message: dataReward
-  //   });
-  // }).catch(err => {
-  //   res.status(500).json({
-  //     responseCode: '55',
-  //     responseDesc: 'Error!',
-  //     message: err.message
-  //   });
-  // })
 }

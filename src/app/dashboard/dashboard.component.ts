@@ -21,6 +21,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   //config pointQ
   checked = false;
+  setBulanan = 100;
+  setTahunan = 1200;
 
   //config auth
   level = '';
@@ -32,6 +34,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
   totalHistoryOut = '';
   private dataIsAuth: Subscription;
   private userId2 = localStorage.getItem("userId");
+
+
+  //point
+  progress = 0;
+  timer: number;
+
+  //point
+  dataPointTotal = 0;
+  dataPointInSub: Subscription;
+  dataPointOutSub: Subscription;
+  totalPointByMount = 0;
+  totalPointByYear = 0;
 
   constructor(
     private serviceDashboard: DashboardAdminService,
@@ -58,10 +72,27 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.serviceTransfer.getHistoryCountOut(resData.message.norek).subscribe(resDataHisOut => {
         this.totalHistoryOut = resDataHisOut.message;
       });
+
+      this.serviceTransfer.getInSumPointMountByNorek(resData.message.norek);
+      this.serviceTransfer.getOutSumPointMountByNorek(resData.message.norek);
+      this.dataPointInSub = this.serviceTransfer.getInSumPointMountByNorekListener()
+        .subscribe((resPointIn: { message: number }) => {
+          this.dataPointOutSub = this.serviceTransfer.getOutSumPointMountByNorekListener()
+            .subscribe((resPointOut: { message: number }) => {
+              const dataPoint = resPointIn.message + resPointOut.message;
+              if (dataPoint >= 0) {
+                this.totalPointByMount = dataPoint;
+              } else {
+                this.totalPointByMount = 0;
+              }
+            });
+        });
+      this.totalPointByYear = resData.message.totalPoint;
     });
     this.authService.autoAuthUser();
     this.nasabahSub = this.serviceDashboard.getNasabahListener().subscribe((nasabahData: { message: NasabahData[] }) => {
       this.dataNasabah = nasabahData.message;
+      console.log(nasabahData.message);
     });
     this.serviceDashboard.getNasabah();
   }

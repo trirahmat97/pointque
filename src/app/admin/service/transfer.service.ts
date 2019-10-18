@@ -71,7 +71,7 @@ export class TransferService {
   transferReward(norek: string, point: string, type: string) {
     const dataTransfer = {
       norek: norek,
-      hadiah: 50000,
+      hadiah: 100000,
       point: point,
       type: type
     }
@@ -105,7 +105,9 @@ export class TransferService {
                 name: dt.name,
                 hadiah: dt.hadiah,
                 point: dt.point,
-                type: dt.type
+                type: dt.type,
+                status: dt.status,
+                date: dt.createdAt
               }
             }),
             maxReward: resData.maxReward
@@ -232,7 +234,8 @@ export class TransferService {
                 type: nsb.type,
                 point: nsb.point,
                 description: nsb.description,
-                createdAt: nsb.createdAt
+                createdAt: nsb.createdAt,
+                senderBank: nsb.senderBank
               }
             }),
             maxInHistory: dataHistoryIn.maxInHistory
@@ -276,7 +279,8 @@ export class TransferService {
                 type: nsb.type,
                 point: nsb.point,
                 description: nsb.description,
-                createdAt: nsb.createdAt
+                createdAt: nsb.createdAt,
+                receiverBank: nsb.receiverBank
               }
             }),
             maxOutHistory: dataHistoryOut.maxOutHistory

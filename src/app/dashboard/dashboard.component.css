@@ -7,6 +7,20 @@
 }
 
 
+
+mat-progress-spinner {
+  margin: auto;
+}
+
+.point-bulan,
+.point-tahun {
+  margin-top: 20px;
+}
+
+mat-progress-bar {
+  width: 400px;
+}
+
 .container-user {
   margin: 10px;
 }

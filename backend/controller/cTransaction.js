@@ -79,35 +79,35 @@ exports.transfer = (req, res, next) => {
           //config point
           let amount = req.body.amount;
           if ((amount >= 1000000) && (amount < 2000000)) {
-            pointSender = 0;
-            pointReceiver = 1;
-          } else if ((amount >= 2000000) && (amount < 3000000)) {
-            pointSender = 0;
-            pointReceiver = 2;
-          } else if ((amount >= 3000000) && (amount < 4000000)) {
-            pointSender = 0;
-            pointReceiver = 3;
-          } else if ((amount >= 4000000) && (amount < 5000000)) {
-            pointSender = 0;
+            pointSender = 2;
             pointReceiver = 4;
-          } else if ((amount >= 5000000) && (amount < 6000000)) {
-            pointSender = 0;
-            pointReceiver = 5;
-          } else if ((amount >= 6000000) && (amount < 7000000)) {
-            pointSender = 0;
+          } else if ((amount >= 2000000) && (amount < 3000000)) {
+            pointSender = 2;
             pointReceiver = 6;
-          } else if ((amount >= 7000000) && (amount < 8000000)) {
-            pointSender = 0;
-            pointReceiver = 7;
-          } else if ((amount >= 8000000) && (amount < 9000000)) {
-            pointSender = 0;
+          } else if ((amount >= 3000000) && (amount < 4000000)) {
+            pointSender = 2;
             pointReceiver = 8;
+          } else if ((amount >= 4000000) && (amount < 5000000)) {
+            pointSender = 2;
+            pointReceiver = 10;
+          } else if ((amount >= 5000000) && (amount < 6000000)) {
+            pointSender = 2;
+            pointReceiver = 12;
+          } else if ((amount >= 6000000) && (amount < 7000000)) {
+            pointSender = 2;
+            pointReceiver = 14;
+          } else if ((amount >= 7000000) && (amount < 8000000)) {
+            pointSender = 2;
+            pointReceiver = 16;
+          } else if ((amount >= 8000000) && (amount < 9000000)) {
+            pointSender = 2;
+            pointReceiver = 18;
           } else if ((amount >= 9000000) && (amount < 10000000)) {
-            pointSender = 0;
-            pointReceiver = 9;
+            pointSender = 2;
+            pointReceiver = 20;
           } else if (amount >= 10000000) {
-            pointSender = 0;
-            pointReceiver = 15;
+            pointSender = 2;
+            pointReceiver = 22;
           } else {
             pointSender = 0;
             pointReceiver = 0;
@@ -122,7 +122,7 @@ exports.transfer = (req, res, next) => {
             amount: req.body.amount,
             type: 'D',
             point: pointSender,
-            senderBank: 'pointque',
+            receiverBank: 'pointkuy!',
             description: req.body.description
           });
           transferSender.save().then(result => {
@@ -135,7 +135,7 @@ exports.transfer = (req, res, next) => {
               amount: req.body.amount,
               type: 'C',
               point: pointReceiver,
-              receiverBank: 'pointque',
+              senderBank: 'pointkuy!',
               description: req.body.description
             });
             transferReceiver.save().then(resultReceiver => {
@@ -237,17 +237,29 @@ exports.transfertfOut = (req, res, next) => {
       //config point
 
       let amount = req.body.amount;
-      if ((amount >= 500000) && (amount <= 2000000)) {
-        pointSender = 5;
-
-      } else if ((amount >= 2000000) && (amount <= 5000000)) {
-        pointSender = 7;
-      } else if (amount >= 10000000) {
-        pointSender = 10;
-      } else {
+      if ((amount >= 1000000) && (amount < 2000000)) {
         pointSender = 2;
+      } else if ((amount >= 2000000) && (amount < 3000000)) {
+        pointSender = 2;
+      } else if ((amount >= 3000000) && (amount < 4000000)) {
+        pointSender = 2;
+      } else if ((amount >= 4000000) && (amount < 5000000)) {
+        pointSender = 2;
+      } else if ((amount >= 5000000) && (amount < 6000000)) {
+        pointSender = 2;
+      } else if ((amount >= 6000000) && (amount < 7000000)) {
+        pointSender = 2;
+      } else if ((amount >= 7000000) && (amount < 8000000)) {
+        pointSender = 2;
+      } else if ((amount >= 8000000) && (amount < 9000000)) {
+        pointSender = 2;
+      } else if ((amount >= 9000000) && (amount < 10000000)) {
+        pointSender = 2;
+      } else if (amount >= 10000000) {
+        pointSender = 2;
+      } else {
+        pointSender = 0;
       }
-      //config transfer sender
       const transferSender = new Transaction({
         sender: req.body.sender,
         senderName: sender.name,
@@ -256,7 +268,7 @@ exports.transfertfOut = (req, res, next) => {
         amount: req.body.amount,
         type: 'D',
         point: pointSender,
-        receiverBank: 'gbank',
+        receiverBank: 'G-Bank',
         description: req.body.description
       });
       transferSender.save().then(result => {
@@ -267,6 +279,102 @@ exports.transfertfOut = (req, res, next) => {
         Nasabah.updateOne({
           _id: sender._id
         }, updateSender).then(resUpdateSender => {
+          return res.status(200).json({
+            responseCode: '00',
+            responseDesc: 'Success!',
+            message: 'Transfer sedang dalam Proses!'
+          });
+        });
+      }).catch(err => {
+        return res.status(500).json({
+          responseCode: '11',
+          responseDesc: 'Invalid!',
+          message: err.message
+        });
+      });
+    }
+  }).catch(err => {
+    return res.status(500).json({
+      responseCode: '11',
+      responseDesc: 'Invalid!',
+      message: err.message
+    });
+  })
+}
+
+exports.transfertfIn = (req, res, next) => {
+  // let receiver;
+  let receiver;
+  let pointReceiver = 0;
+  Nasabah.findOne({
+    norek: req.body.receiver
+  }).then(nasabahNasabah => {
+    if (!nasabahNasabah) {
+      return res.status(401).json({
+        responseCode: '11',
+        responseDesc: 'Invalid!',
+        message: 'Account Not Fund!'
+      });
+    }
+    receiver = nasabahNasabah;
+    if (receiver.norek != req.body.receiver) {
+      return res.status(400).json({
+        responseCode: '11',
+        responseDesc: 'Invalid!',
+        message: 'Tujuan tidak valid!'
+      });
+    } else if (receiver.status != 1) {
+      return res.status(400).json({
+        responseCode: '11',
+        responseDesc: 'Invalid!',
+        message: 'Rekening Tidak Valid!'
+      });
+    } else {
+      //config point
+
+      let amount = req.body.amount;
+      if ((amount >= 1000000) && (amount < 2000000)) {
+        pointReceiver = 4;
+      } else if ((amount >= 2000000) && (amount < 3000000)) {
+        pointReceiver = 8;
+      } else if ((amount >= 3000000) && (amount < 4000000)) {
+        pointReceiver = 12;
+      } else if ((amount >= 4000000) && (amount < 5000000)) {
+        pointReceiver = 16;
+      } else if ((amount >= 5000000) && (amount < 6000000)) {
+        pointReceiver = 20;
+      } else if ((amount >= 6000000) && (amount < 7000000)) {
+        pointReceiver = 22;
+      } else if ((amount >= 7000000) && (amount < 8000000)) {
+        pointReceiver = 24;
+      } else if ((amount >= 8000000) && (amount < 9000000)) {
+        pointReceiver = 26;
+      } else if ((amount >= 9000000) && (amount < 10000000)) {
+        pointReceiver = 28;
+      } else if (amount >= 10000000) {
+        pointReceiver = 30;
+      } else {
+        pointReceiver = 0;
+      }
+      const transferReceiver = new Transaction({
+        sender: req.body.sender,
+        senderName: req.body.senderName,
+        receiver: req.body.receiver,
+        receiverName: receiver.name,
+        amount: req.body.amount,
+        type: 'C',
+        point: pointReceiver,
+        senderBank: 'G-Bank',
+        description: req.body.description
+      });
+      transferReceiver.save().then(result => {
+        const updateReceiver = {
+          balance: receiver.balance + req.body.amount,
+          totalPoint: receiver.totalPoint + pointReceiver
+        }
+        Nasabah.updateOne({
+          _id: receiver._id
+        }, updateReceiver).then(resUpdateReceiver => {
           return res.status(200).json({
             responseCode: '00',
             responseDesc: 'Success!',
