@@ -9,7 +9,8 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  level = '';
+  level = localStorage.getItem("level");
+  // private userId2 = localStorage.getItem("userId");
   userId = '';
   private userId2 = localStorage.getItem("userId");
   //config rofile
@@ -32,9 +33,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   setClick() {
-    // setTimeout(() => {
-    this.notif = '';
-    // }, 1000)
+    setTimeout(() => {
+      this.notif = '';
+    }, 10000)
   }
 
   onToggleSidenav() {

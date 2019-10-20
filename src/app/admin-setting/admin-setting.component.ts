@@ -42,7 +42,7 @@ export const MY_FORMATS = {
 export class AdminSettingComponent implements OnInit, AfterViewInit, OnDestroy {
 
   //set
-  setBulan = 1;
+  setBulan = 50;
 
   dataPointInAll: Poitn2Data[] = [];
   dataPointOutAll: Poitn2Data[] = [];

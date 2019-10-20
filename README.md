@@ -1,4 +1,18 @@
-# IntBank
+#follow IG : _vl.code and _tra26
+#app mini bank, system point.
+
+this image app:
+1. ![login](./image/1.png)
+2. ![dashboard nasabah](./image/2.JPG)
+3. ![transfer](./image/3.png)
+4. ![history](./image/4.png)
+5. ![dashboard admin](./image/5.png)
+6. ![random reward](./image/6.png)
+7. ![reward](./image/7.JPG)
+
+
+
+# POINTKUY!
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.2.
 

@@ -11,7 +11,7 @@
     </button>
   </div>
   <div fxFlex fxLayout fxLayoutAlign="flex-end">
-    <div class="card-notify">
+    <div class="card-notify" *ngIf="level == 2">
       <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu"
         (click)="setClick()">
         <mat-icon matBadge="{{notif}}" matBadgeColor="warn" matBadgeSize="small">notifications</mat-icon>
@@ -19,7 +19,8 @@
       <mat-menu #menu="matMenu">
         <button mat-menu-item>
           <mat-icon color="primary">info</mat-icon>
-          <span>Ayo Tingkatkan Pointmu {{point}}!</span>
+          <span>Ayo Tingkatkan Pointmu {{point}}! </span>
+          <br>
         </button>
       </mat-menu>
     </div>
