@@ -3,6 +3,9 @@
 #database
 /database
 
+./msl.txt
+./catatan.txt
+
 # compiled output
 /dist
 /tmp
@@ -25,6 +28,7 @@ speed-measure-plugin*.json
 *.launch
 .settings/
 *.sublime-workspace
+
 
 # IDE - VSCode
 .vscode/*
