@@ -7,9 +7,9 @@ this image app:
 # 1. Login
 ![login](https://github.com/trirahmat97/pointque/blob/master/image/1.png)
 # 2. dashboard nasabah
-![dashboard nasabah](https://github.com/trirahmat97/pointque/blob/master/image2.JPG)
+![dashboard nasabah](https://github.com/trirahmat97/pointque/blob/master/image/2.JPG)
 # 3. transfer
-![transfer]https://github.com/trirahmat97/pointque/blob/master/image/3.png)
+![transfer](https://github.com/trirahmat97/pointque/blob/master/image/3.png)
 # 4. history
 ![history](https://github.com/trirahmat97/pointque/blob/master/image/4.png)
 # 5. dashboard admin
