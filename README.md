@@ -1,5 +1,5 @@
-#follow IG : _vl.code and _tra26
-#app mini bank, system point.
+# follow IG : _vl.code and _tra26
+# app mini bank, system point.
 
 
 
