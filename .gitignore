@@ -3,8 +3,7 @@
 #database
 /database
 
-./msl.txt
-./catatan.txt
+/catatan
 
 # compiled output
 /dist

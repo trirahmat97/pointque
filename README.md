@@ -4,13 +4,20 @@
 
 
 this image app:
-1. ![login](https://github.com/trirahmat97/pointque/blob/master/image/1.png)
-2. ![dashboard nasabah](https://github.com/trirahmat97/pointque/blob/master/image2.JPG)
-3. ![transfer]https://github.com/trirahmat97/pointque/blob/master/image/3.png)
-4. ![history](https://github.com/trirahmat97/pointque/blob/master/image/4.png)
-5. ![dashboard admin](https://github.com/trirahmat97/pointque/blob/master/image/5.png)
-6. ![random reward](https://github.com/trirahmat97/pointque/blob/master/image/6.png)
-7. ![reward](https://github.com/trirahmat97/pointque/blob/master/image/7.JPG)
+# 1. Login
+![login](https://github.com/trirahmat97/pointque/blob/master/image/1.png)
+# 2. dashboard nasabah
+![dashboard nasabah](https://github.com/trirahmat97/pointque/blob/master/image2.JPG)
+# 3. transfer
+![transfer]https://github.com/trirahmat97/pointque/blob/master/image/3.png)
+# 4. history
+![history](https://github.com/trirahmat97/pointque/blob/master/image/4.png)
+# 5. dashboard admin
+![dashboard admin](https://github.com/trirahmat97/pointque/blob/master/image/5.png)
+# 6. random reward
+![random reward](https://github.com/trirahmat97/pointque/blob/master/image/6.png)
+# 7. reward
+![reward](https://github.com/trirahmat97/pointque/blob/master/image/7.JPG)
 
 
 
